@@ -1,4 +1,4 @@
-# WSL2で Diffusers を利用した Stable Diffusion の実行スクリプト
+# WSL2で diffusers を利用した Stable Diffusion の実行スクリプト
 - Text to Imageのスクリプト (`t2i.py`)
 - Image to Imageのスクリプト (`i2i.py`)
 
