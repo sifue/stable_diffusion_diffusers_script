@@ -20,8 +20,10 @@ pipe.to(DEVICE)
 prompt = "new League of Legends champion, use japanese blade, rich detail face and eyes, detailed CG art"
 
 with autocast(DEVICE):
-  # generator = torch.Generator("cuda").manual_seed(2525) # generator が必要な際には利用 generator=generator で引数に入れる
+  # generator が必要な際には利用 generator=generator で引数に入れる
+  generator = torch.Generator("cuda").manual_seed(2525)
   image = pipe(prompt, guidance_scale=7.5,
+               generator=generator,
                num_inference_steps=100)["sample"][0]
 
   os.makedirs('./results', exist_ok=True)
