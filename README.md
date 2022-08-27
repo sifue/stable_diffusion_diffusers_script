@@ -24,7 +24,7 @@ YOUR_TOKEN=hf_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
 python3 t2i.py
 ```
 
-などと実行するだけでOK。必要に応じてスクリプトを編集。
+などと実行するだけでOK。必要に応じてスクリプトを編集。出力は`{unixtime}.txt`と`{unixtime}.png`でresultsフォルダに出力する。
 
 ## 参考ドキュメント
 
