@@ -1,6 +1,7 @@
 # WSL2で Diffusers を利用した Stable Diffusion の実行スクリプト
 - Text to Imageのスクリプト (`t2i.py`)
 - Image to Imageのスクリプト (`i2i.py`)
+- Image to Imageのグリッド表示スクリプト (`i2ig.py`)
 
 以上のスクリプトを用意。
 

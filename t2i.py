@@ -17,14 +17,14 @@ pipe = StableDiffusionPipeline.from_pretrained(
     MODEL_ID, revision="fp16", torch_dtype=torch.float16, use_auth_token=YOUR_TOKEN)
 pipe.to(DEVICE)
 
-prompt = "new League of Legends champion, use japanese blade, rich detail face and eyes, detailed CG art"
+prompt = "beautiful illustration of anime maid, stunning and rich detail, pretty face and eyes. 3D style, Pixiv featured."
 
 with autocast(DEVICE):
   # generator が必要な際には利用 generator=generator で引数に入れる
-  generator = torch.Generator("cuda").manual_seed(2525)
+  generator = torch.Generator("cuda").manual_seed(25253)
   image = pipe(prompt, guidance_scale=7.5,
                generator=generator,
-               num_inference_steps=100)["sample"][0]
+               num_inference_steps=250)["sample"][0]
 
   os.makedirs('./results', exist_ok=True)
   ut = int(time.time())

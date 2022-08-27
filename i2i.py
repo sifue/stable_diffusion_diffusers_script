@@ -212,8 +212,9 @@ def preprocess(image):
     image = torch.from_numpy(image)
     return 2.*image - 1.
 
+prompt = "Beautiful illustration of anime maid, stunning and rich detail, pretty face and eyes. 3D style, Pixiv featured."
 # prompt = "stunning and rich detail, pretty face and eyes, detailed CG art, by Makoto Shinkai"
-prompt = "rich detail face and eyes, detailed CG art, by Makoto Shinkai"
+# prompt = "rich detail face and eyes, detailed CG art, by Makoto Shinkai"
 # prompt = "trending on pixiv fanbox, painted by greg rutkowski makoto shinkai takashi takeuchi studio ghibli"
 # prompt = "Alphonse Mucha style painting"
 # prompt = "Salvador Dalí style painting"
@@ -229,7 +230,7 @@ with autocast(DEVICE):
         init_image = preprocess(init_img)
 
         # generator が必要な際には利用 generator=generator で引数に入れる
-        generator = torch.Generator("cuda").manual_seed(2525)
+        generator = torch.Generator("cuda").manual_seed(25253)
         image = pipe(prompt,
                      guidance_scale=7.5,
                      init_image=init_image,
