@@ -218,10 +218,11 @@ def preprocess(image):
     image = torch.from_numpy(image)
     return 2.*image - 1.
 
+
+prompt = "stunning and rich detail, pretty face and eyes, detailed CG art, by Makoto Shinkai"
 # prompt = "Fortnite style CG art"
 # prompt = "Beautiful illustration of anime maid, stunning and rich detail, pretty face and eyes. 3D style, Pixiv featured."
-# prompt = "stunning and rich detail, pretty face and eyes, detailed CG art, by Makoto Shinkai"
-prompt = "rich detail face and eyes, detailed CG art, by Makoto Shinkai"
+# prompt = "rich detail face and eyes, detailed CG art, by Makoto Shinkai"
 # prompt = "trending on pixiv fanbox, painted by greg rutkowski makoto shinkai takashi takeuchi studio ghibli"
 # prompt = "Alphonse Mucha style painting"
 # prompt = "Salvador Dalí style painting"
@@ -241,7 +242,7 @@ with autocast(DEVICE):
         image = pipe(prompt,
                      guidance_scale=7.5,
                      init_image=init_image,
-                     strength=0.50,
+                     strength=0.5,
                      generator=generator,
                      num_inference_steps=250)["sample"][0]
 
