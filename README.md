@@ -1,7 +1,9 @@
 # WSL2で diffusers を利用した Stable Diffusion の実行スクリプト
 - Text to Imageのスクリプト (`t2i.py`)
+- Text to Imageの複数回バッチ実行スクリプト (`t2i_batch.sh`)
 - Image to Imageのスクリプト (`i2i.py`)
-- Image to Imageのグリッド表示スクリプト (`i2ig.py`)
+- Image to Imageの複数回バッチ実行スクリプト (`i2i_batch.sh`)
+- Text to Imageのグリッド表示スクリプト (`i2ig.py`)
 
 以上のスクリプトを用意。
 

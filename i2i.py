@@ -1,4 +1,5 @@
 # Image to Image を行うスクリプト
+# --seed 引数でシード値を渡せる
 # promptを編集し、 results/init.jpg を変更
 # strength は元の絵をどれぐらい参考にするか 0.85 で 85%
 # 参考ドキュメント: https://colab.research.google.com/github/patil-suraj/Notebooks/blob/master/image_2_image_using_diffusers.ipynb#scrollTo=V24njWQBC8eC
@@ -27,6 +28,11 @@ from diffusers import (
 from diffusers.pipelines.stable_diffusion import StableDiffusionSafetyChecker
 from transformers import CLIPFeatureExtractor, CLIPTextModel, CLIPTokenizer
 
+import argparse
+parser = argparse.ArgumentParser()
+parser.add_argument("--seed", help="optional")
+args = parser.parse_args()
+seed = int(args.seed) if args.seed else 2525
 
 class StableDiffusionImg2ImgPipeline(DiffusionPipeline):
     def __init__(
@@ -212,9 +218,10 @@ def preprocess(image):
     image = torch.from_numpy(image)
     return 2.*image - 1.
 
-prompt = "Beautiful illustration of anime maid, stunning and rich detail, pretty face and eyes. 3D style, Pixiv featured."
+# prompt = "Fortnite style CG art"
+# prompt = "Beautiful illustration of anime maid, stunning and rich detail, pretty face and eyes. 3D style, Pixiv featured."
 # prompt = "stunning and rich detail, pretty face and eyes, detailed CG art, by Makoto Shinkai"
-# prompt = "rich detail face and eyes, detailed CG art, by Makoto Shinkai"
+prompt = "rich detail face and eyes, detailed CG art, by Makoto Shinkai"
 # prompt = "trending on pixiv fanbox, painted by greg rutkowski makoto shinkai takashi takeuchi studio ghibli"
 # prompt = "Alphonse Mucha style painting"
 # prompt = "Salvador Dalí style painting"
@@ -229,8 +236,8 @@ with autocast(DEVICE):
         init_img = init_img.resize((512, 512))
         init_image = preprocess(init_img)
 
-        # generator が必要な際には利用 generator=generator で引数に入れる
-        generator = torch.Generator("cuda").manual_seed(25253)
+        print(f'Generating start. seed: {seed}')
+        generator = torch.Generator("cuda").manual_seed(seed)
         image = pipe(prompt,
                      guidance_scale=7.5,
                      init_image=init_image,
@@ -243,5 +250,7 @@ with autocast(DEVICE):
         image.save(f"./results/{ut}.png")
 
         f = open(f'./results/{ut}.txt', 'w')
-        f.write(f'{prompt}')
+        f.write(f'{seed}\n')
+        f.write(f'{prompt}\n')
         f.close()
+        print(f'Generating finished. seed: {seed}')
